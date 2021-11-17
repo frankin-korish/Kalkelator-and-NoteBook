@@ -1,0 +1,61 @@
+import tkinter
+from tkinter.filedialog import asksaveasfile, askopenfile
+from tkinter.messagebox import showerror
+
+FILE_NAME = tkinter.NONE
+
+
+def new_file():
+    global FILE_NAME
+    FILE_NAME = "Untitled"
+    text.delete('1.0', tkinter.END)
+
+
+def save_file():
+    data = text.get('1.0', tkinter.END)
+    out = open(FILE_NAME, 'w')
+    out.write(data)
+    out.close()
+
+
+def save_as():
+    out = asksaveasfile(mode='w', defaultextension='.txt')
+    data = text.get('1.0', tkinter.END)
+    try:
+        out.write(data.rstrip())
+    except Exception:
+        showerror(title="Oops!", message="Unable to save file....")
+
+
+def open_file():
+    global FILE_NAME
+    inp = askopenfile(mode="r")
+    if inp is None:
+        return
+    FILE_NAME = inp.name
+
+    data = inp.read()
+    text.delete('1.0', tkinter.END)
+    text.insert('1.0', data)
+
+
+root = tkinter.Tk()
+root.title("NoteBook")
+root.minsize(width=400, height=400)
+root.maxsize(width=1280, height=720)
+
+text = tkinter.Text(root, width=400, height=400)
+text.pack()
+
+menuBar = tkinter.Menu(root)
+fileMenu = tkinter.Menu(menuBar)
+fileMenu.add_command(label="Новый файл", command=new_file)
+fileMenu.add_command(label="Открыть", command=open_file)
+fileMenu.add_command(label="Сохранить", command=save_file)
+fileMenu.add_command(label="Сохранить как", command=save_as)
+fileMenu.add_separator()
+fileMenu.add_command(label="Выход", command=root.quit)
+menuBar.add_cascade(label="Файл", menu=fileMenu)
+
+root.config(menu=menuBar)
+root.mainloop()
