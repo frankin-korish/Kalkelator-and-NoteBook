@@ -18,6 +18,17 @@ def save_file():
     out.write(data)
     out.close()
 
+def open_file():
+    global FILE_NAME
+    inp = askopenfile(mode="r")
+    if inp is None:
+        return
+    FILE_NAME = inp.name
+
+    data = inp.read()
+    text.delete('1.0', tkinter.END)
+    text.insert('1.0', data)
+    
 root = tkinter.Tk()
 root.title("NoteBook")
 root.minsize(width=320, height=480)
@@ -30,6 +41,7 @@ menuBar = tkinter.Menu(root)
 fileMenu = tkinter.Menu(menuBar)
 fileMenu.add_comand(label="New file", command=new_file)
 fileMenu.add_command(label="Save", command=save_file)
+fileMenu.add_command(label="Open", command=open_file)
 fileMenu.add_separator()
 menuBar.add_cascade(label="File", menu=fileMenu)
 
