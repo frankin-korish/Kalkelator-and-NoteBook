@@ -1,4 +1,4 @@
-''' NoteBook v 0.1.4 '''
+''' NoteBook v 0.2.0 '''
 
 import tkinter
 from tkinter.filedialog import asksaveasfile, askopenfile
@@ -53,6 +53,7 @@ fileMenu.add_command(label="Save as", command=save_as)
 fileMenu.add_command(label="Open", command=open_file)
 fileMenu.add_separator()
 menuBar.add_cascade(label="File", menu=fileMenu)
+fileMenu.add_command(label="Выход", command=root.quit)
 
 root.config(menu=menuBar)
 root.mainloop()
