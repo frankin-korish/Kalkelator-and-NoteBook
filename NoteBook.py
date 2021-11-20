@@ -1,4 +1,4 @@
-''' NoteBook v 0.2.0 '''
+''' NoteBook v 1.0.0 '''
 
 import tkinter
 from tkinter.filedialog import asksaveasfile, askopenfile
@@ -12,11 +12,13 @@ def new_file():
     FILE_NAME = "Untitled"
     text.delete('1.0', tkinter.END)
 
+
 def save_file():
     data = text.get('1.0', tkinter.END)
     out = open(FILE_NAME, 'w')
     out.write(data)
     out.close()
+
 
 def save_as():
     out = asksaveasfile(mode='w', defaultextension='.txt')
@@ -24,7 +26,8 @@ def save_as():
     try:
         out.write(data.rstrip())
     except Exception:
-        showerror(title="Oops!", message="Unable to save file....")
+        showerror(title="Упс!", message="Не удалось сохранить файл....")
+
 
 def open_file():
     global FILE_NAME
@@ -36,7 +39,8 @@ def open_file():
     data = inp.read()
     text.delete('1.0', tkinter.END)
     text.insert('1.0', data)
-    
+
+
 root = tkinter.Tk()
 root.title("NoteBook")
 root.minsize(width=320, height=480)
@@ -47,7 +51,7 @@ text.pack()
 
 menuBar = tkinter.Menu(root)
 fileMenu = tkinter.Menu(menuBar)
-fileMenu.add_comand(label="Новый файл", command=new_file)
+fileMenu.add_command(label="Новый файл", command=new_file)
 fileMenu.add_command(label="Сохранить", command=save_file)
 fileMenu.add_command(label="Сохранить как", command=save_as)
 fileMenu.add_command(label="Открыть", command=open_file)
