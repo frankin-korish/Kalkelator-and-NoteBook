@@ -28,6 +28,7 @@ text.pack()
 
 menuBar = tkinter.Menu(root)
 fileMenu = tkinter.Menu(menuBar)
+fileMenu.add_comand(label="New file", command=new_file)
 fileMenu.add_command(label="Save", command=save_file)
 fileMenu.add_separator()
 menuBar.add_cascade(label="File", menu=fileMenu)
