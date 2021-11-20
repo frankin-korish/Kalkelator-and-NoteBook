@@ -1,0 +1,28 @@
+''' Calkulator v 0.0.1 '''
+
+from tkinter import *
+from tkinter import ttk
+import math
+
+root =Tk()
+root.title("Calculator")
+
+bttn_list = [
+    "1", "2", "3",
+    "4", "5", "6",
+    "7", "8", "9",
+]
+
+r = 1
+c = 0
+for i in bttn_list:
+    rel = ""
+    cmd=lambda  x=i: calc(x)
+    ttk.Button(root, text=i, command=cmd, width=10).grid(row=r, column=c)
+    c += 1
+    if c > 4:
+        c=0
+        r+=1
+
+calc_entry = Entry(root, width=33)
+calc_entry.grid(row=0, column=0, columnspan=5)
